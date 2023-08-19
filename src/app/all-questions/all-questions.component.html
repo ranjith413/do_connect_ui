@@ -1,0 +1,180 @@
+<mat-drawer-container class="sideNav">
+    <mat-drawer class="side" mode="side" opened>
+        <h4 id="categories">Categories</h4>
+        <ul class="nav flex-column">
+            <nav>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="/all-questions">All</a>
+                </li>
+            </nav>
+            <li class="nav-item">
+                <a class="nav-link" href="#" (click)="getByTopic('java')">Java</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" (click)="getByTopic('Python')">Python</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" (click)="getByTopic('SQL')">SQL</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" (click)="getByTopic('Software')">Software</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" (click)="getByTopic('Others')">Others</a>
+            </li>
+           
+        </ul>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div id="spacer" class="input-group flex-nowrap w-50 p-1">
+            <input type="search" class="form-control" placeholder="Search" #search
+            (keyup.enter)="getValue(search.value)" aria-label="Search" aria-describedby="addon-wrapping">
+        </div>
+            <nav class ="top-nav">
+                <h2>All Questions</h2>
+                <h6 *ngIf="!loggedIn()">If you want to ask Question, Please Login</h6>
+                
+                <a *ngIf="loggedIn()=='User'" routerLink="/ask-question" routerLinkActive="active" ariaCurrentWhenActive="page">
+                    <button class="btn btn-primary" id="ask">Ask Question</button>
+                </a>
+
+            </nav>
+            <div *ngFor="let data of que">
+                
+            <mat-card *ngIf="data.isApproved || loggedIn()=='Admin'" class="questions">
+                
+                
+                <mat-card-title>{{data.que}}</mat-card-title>
+                <mat-card-subtitle>pradeep</mat-card-subtitle>
+                <a *ngIf="loggedIn()=='Admin'"  routerLinkActive="active" ariaCurrentWhenActive="page">
+                    <button class="btn btn-primary" (click)="approveQue(data)" style="background-color: green; margin: down 5px;" id="ask">
+                        {{changeQue(data.isApproved)}}
+                    </button>
+                    <a *ngIf="loggedIn()=='Admin'" routerLinkActive="active" ariaCurrentWhenActive="page">
+                        <button class="btn btn-primary" (click)="deleteQue(data.qid)" id="ask">Delete</button>
+                    </a>
+                </a>
+                <mat-card-content>
+                    <div *ngFor="let a of item">
+                        <div *ngIf="a.isApproved || loggedIn()=='Admin'">
+                    <p *ngIf="a.questions.qid==data.qid"><b>Ans- {{a.ansid}} - </b> {{a.ans}} 
+                        <a *ngIf="loggedIn()=='Admin'"  routerLinkActive="active" ariaCurrentWhenActive="page">
+                            <button class="btn btn-primary" (click)="approveAns(a)" style="background-color: green; margin: down 5px;" id="ask">
+                                {{changeAns(a.isApproved)}}
+                            </button>
+                        </a>
+                        <a *ngIf="loggedIn()=='Admin'" routerLinkActive="active" ariaCurrentWhenActive="page">
+                            <button class="btn btn-primary" (click)="deleteAns(a.ansid)" id="ask">Delete</button>
+                        </a>
+                    </p>
+                
+                    <div>
+                        <span *ngIf="a.questions.qid==data.qid" class="answer">Answered by- {{uname}}</span>
+                    </div>
+                </div>
+                </div>
+                <span class="questionTag"><label for="java">{{data.topic}}</label></span>
+
+            </mat-card-content>
+                    <mat-card-actions>
+                    <div class="accordion" id="accordionExample1">
+                        <div class="yourAnswer"  >
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        Add your answer here.
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                    data-bs-parent="#accordionExample1">
+                                    <div class="accordion-body">
+                                        <form (ngSubmit)="postAnswer(answer.value, data.qid)"  #answer="ngForm">
+                                            <div class="mb-3 padding">
+                                                <textarea class="form-control" ngModel name="ans" rows="3"
+                                                    placeholder="Write your answer" required></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit answer</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+            <!-- <mat-card class="questions">
+                <mat-card-title>Explain Cloud Computing.</mat-card-title>
+                <mat-card-subtitle>charan</mat-card-subtitle>
+                <mat-card-content>
+                    <p>{{longText2}}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <span class="questionTag"><label for="cloud">Cloud</label></span>
+                    <span class="answer">Answered by- {{answeredBy}}</span>
+                    <div class="yourAnswer">
+                        <div class="accordion" id="accordionExample2">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Add your answer here.
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                    data-bs-parent="#accordionExample2">
+                                    <div class="accordion-body">
+                                        <form action="">
+                                            <div class="mb-3 padding">
+                                                <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"
+                                                    placeholder="Write your answer" required></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit answer</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </mat-card-actions>
+            </mat-card>
+            <mat-card class="questions">
+                <mat-card-title>What is the history of python ?</mat-card-title>
+                <mat-card-subtitle>sameer</mat-card-subtitle>
+                <mat-card-content>
+                    <p>{{longText3}}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <span class="questionTag"><label for="python">Python</label></span>
+                    <span class="answer">Answered by- {{answeredBy}}</span>
+                    <div class="yourAnswer">
+                        <div class="accordion" id="accordionExample3">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        Add your answer here.
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse"
+                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample3">
+                                    <div class="accordion-body">
+                                        <form action="">
+                                            <div class="mb-3 padding">
+                                                <textarea class="form-control" id="exampleFormControlTextarea3" rows="3"
+                                                    placeholder="Write your answer" required></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit answer</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-actions>
+            </mat-card> -->
+    </mat-drawer-content>
+</mat-drawer-container>

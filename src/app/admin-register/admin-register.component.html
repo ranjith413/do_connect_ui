@@ -1,0 +1,29 @@
+<div class="body">
+    <div class="register">
+        <form #admin="ngForm" (ngSubmit)="addAdmin()">
+            <label for="register" class="container">
+                <h2>Register As Admin</h2>
+            </label><br>
+            <div class="row g-3">
+                <div class="col">
+                    <input type="text" class="form-control" [(ngModel)]="credential.aname" id="aname"  name="aname" placeholder="Name" aria-label=" Name" required>
+                </div>
+            </div>
+            <br>
+            <div class="mb-3">
+                <input type="text" class="form-control" [(ngModel)]="credential.aemail" id="aemail"  name="aemail" placeholder="Email" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" [(ngModel)]="credential.apassword" id="apassword"  name="apassword" placeholder="Password" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control"  placeholder="Confirm Password" required>
+            </div>
+            <div class="registerButton">
+                <button type="submit"  class="btn btn-primary Button">Register</button>
+            </div>
+            
+        </form>
+       <a routerLink="/admin-login" routerLinkActive="active" ariaCurrentWhenActive="page"><p>Already registered? Login here.</p></a>
+    </div>
+</div>

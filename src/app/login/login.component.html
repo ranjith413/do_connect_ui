@@ -1,0 +1,23 @@
+<div class="body">
+    <div class="login">
+        <form #loginForm="ngForm" (ngSubmit)="onlogin()" >
+            <div class="email">
+                <label for="login" class="container">
+                    <h2>Login</h2>
+                </label><br>
+                <input type="email" class="form-control" [(ngModel)]="credential.uemail" id="uemail" name="uemail" placeholder="Email">
+                <br>
+                <input type="password" class="form-control" [(ngModel)]="credential.upassword" id="upassword" name="upassword" placeholder="Password">
+            </div>
+            <div class="loginButton">
+                <button type="submit"  class="btn btn-primary" [disabled]="loginForm.form.invalid">Login</button>
+            </div>
+        </form>
+        <a routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page">
+            <p>New to DoConnect? Register here.
+        </a>
+    </div>
+    <li><a routerLink="/admin-login" routerLinkActive="active" ariaCurrentWhenActive="page">
+            <p>If you are our admin, Login here</p>
+        </a></li>
+</div>

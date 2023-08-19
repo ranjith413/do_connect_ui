@@ -1,0 +1,28 @@
+<div class="body">
+    <div class="register">
+        <form (ngSubmit)="addUser()" #register="ngForm" >
+            <label for="register" class="container">
+                <h2>Register</h2>
+            </label><br>
+            <div class="row g-3">
+                <div class="mb-3">
+                    <input type="text" class="form-control" [(ngModel)]="credential.uname" placeholder="Name" Id="uname" name="uname" required>
+                </div>
+            </div>
+            <br>
+            <div class="mb-3">
+                <input type="email" class="form-control" [(ngModel)]="credential.uemail" id="uemail"  name="uemail" placeholder="Email" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" [(ngModel)]="credential.upassword" id="upassword" name="upassword" placeholder="Password" required>
+            </div>
+            <div class="registerButton">
+                <button type="submit" class="btn btn-primary Button" [disabled]="register.form.invalid">Register</button>
+            </div>
+
+        </form>
+        <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">
+            <p>Already a member? Login here.</p>
+        </a>
+    </div>  
+</div>

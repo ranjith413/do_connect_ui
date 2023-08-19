@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">DoConnect</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                </li>
+
+            </ul>
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <li *ngIf="loggedInUser() "><a ariaCurrentWhenActive="page" class="btn me-2 my-2" >
+                    {{uname}}
+                </a></li>
+                <li *ngIf="loggedInUser() "><a (click)="onLogout()"  ariaCurrentWhenActive="page" class="btn btn-primary me-2 my-2" role="button">
+                    Logout
+                </a></li>
+                <li *ngIf="!loggedInUser()"><a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page" class="btn btn-outline-primary me-2 my-2" role="button">
+                        Log in
+                    </a></li>
+                <li *ngIf="!loggedInUser()"> <a  routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page" class="btn btn-primary me-2 my-2" role="button">
+                        Sign up
+                    </a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>

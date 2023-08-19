@@ -1,0 +1,22 @@
+<div class="body">
+    <div class="login">
+        <form #login="ngForm" (ngSubmit)="onlogin()">
+            <div class="email">
+                <label for="login" class="container">
+                    <h2>Login As Admin</h2>
+                </label><br>
+                <label for="exampleInputEmail1" class="form-label">Email </label>
+                <input type="email" class="form-control" [(ngModel)]="credential.aemail" id="aemail"  name="aemail" aria-describedby="emailHelp">
+                <br>
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" [(ngModel)]="credential.apassword" id="apassword"  name="apassword">
+            </div>
+            <div class="loginButton">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+        <a routerLink="/admin-register" routerLinkActive="active" ariaCurrentWhenActive="page">
+            <p>Not registered as admin yet? Register here.
+        </a>
+    </div>
+</div>
